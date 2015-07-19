@@ -1,6 +1,7 @@
 require 'open-uri'
 
 class GeocodingController < ApplicationController
+  require 'open-uri'
   def street_to_coords_form
     # Nothing to do here.
     render("street_to_coords_form.html.erb")
@@ -15,13 +16,10 @@ class GeocodingController < ApplicationController
     # The street address the user input is in the string @street_address.
     # A URL-safe version of the street address, with spaces and other illegal
     #   characters removed, is in the string url_safe_street_address.
-    # ==========================================================================
-
-
-
-    @latitude = "Replace this string with your answer."
-
-    @longitude = "Replace this string with your answer."
+    # ========================================================================
+    @parsed_data= JSON.parse(open("http://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA").read) 
+    @longitude = @parsed_data["results"][0]["geometry"]["location"]["lng"]
+    @latitude = @parsed_data["results"][0]["geometry"]["location"]["lat"]
 
     render("street_to_coords.html.erb")
   end

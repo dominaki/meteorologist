@@ -29,11 +29,11 @@ class MeteorologistController < ApplicationController
     @parsed_result=JSON.parse(@result)
     @current_temperature = @parsed_result["currently"]["temperature"]
     @current_summary = @parsed_result["currently"]["summary"]
-    @summary_of_next_sixty_minutes = @parsed_result["hourly"]["data"][0]["summary"]
+    @summary_of_next_sixty_minutes = @parsed_result["minutely"]["summary"]
     @summary_of_next_several_hours = @parsed_result["hourly"]["summary"]
     @summary_of_next_several_days = @parsed_result["daily"]["summary"]
 
     render("street_to_weather.html.erb")
-    
+
   end
 end

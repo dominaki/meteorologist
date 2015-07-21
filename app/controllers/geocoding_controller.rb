@@ -19,8 +19,8 @@ class GeocodingController < ApplicationController
     #   characters removed, is in the string url_safe_street_address.
     # ========================================================================
     url = "https://maps.googleapis.com/maps/api/geocode/json?address=#{@street_address}"
-    @result = open(url).read
-    @parsed_result =JSON.parse(@result) 
+    @result= open(url).read
+    @parsed_result=JSON.parse(@result) 
     @longitude = @parsed_result["results"][0]["geometry"]["location"]["lng"]
     @latitude = @parsed_result["results"][0]["geometry"]["location"]["lat"]
 
